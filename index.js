@@ -1,16 +1,17 @@
 function askNumber() {
-  return prompt("Donner-moi un nombre entier");
+  return prompt("Donnez-moi un nombre entier");
 }
-function didIWin(givenNumber) {
-  if (isNaN(parseInt(givenNumber)) || Number.isInteger(parseInt(givenNumber))) {
+function didIWin(givenNumber, numbertoFind) {
+  if (isNaN(parseInt(givenNumber))) {
     alert(
       "Erreur de format, accepte seulement les nombres entiers exemple de format accepté (1, 10, 25, 68)"
     );
+    console.log(Number.isInteger(parseInt(givenNumber)));
     return false;
-  } else if (parseInt(givenNumber) > 22) {
+  } else if (parseInt(givenNumber) > numbertoFind) {
     alert("Plus grand");
     return false;
-  } else if (parseInt(givenNumber) < 22) {
+  } else if (parseInt(givenNumber) < numbertoFind) {
     alert("Plus petit");
     return false;
   } else {
@@ -18,12 +19,18 @@ function didIWin(givenNumber) {
     return true;
   }
 }
+let numbertoFind = -1;
 
-function gameplay() {
-  let givenNumber;
-  do {
-    givenNumber = askNumber();
-  } while (!didIWin(givenNumber));
+function askNumberToFind() {
+  numbertoFind = prompt("Donnez-moi un nombre à deviner, s'il vous plait");
+  if (parseInt(numbertoFind) < 0 || parseInt(numbertoFind) > 50)
+    askNumberToFind();
 }
 
+function gameplay() {
+  const givenNumber = askNumber();
+  const result = didIWin(givenNumber, numbertoFind);
+  if (!result) gameplay();
+}
+askNumberToFind();
 gameplay();
