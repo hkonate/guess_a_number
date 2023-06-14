@@ -1,15 +1,21 @@
 function askNumber() {
-  return prompt("Hi, can you give me a number please");
+  return prompt("Donner-moi un nombre entier");
 }
 function didIWin(givenNumber) {
-  if (parseInt(givenNumber) === 22) {
-    alert("Bravo ! Vous avez deviné le nombre");
+  if (isNaN(parseInt(givenNumber)) || Number.isInteger(parseInt(givenNumber))) {
+    alert(
+      "Erreur de format, accepte seulement les nombres entiers exemple de format accepté (1, 10, 25, 68)"
+    );
+    return false;
   } else if (parseInt(givenNumber) > 22) {
     alert("Plus grand");
+    return false;
   } else if (parseInt(givenNumber) < 22) {
     alert("Plus petit");
+    return false;
   } else {
-    alert("Erreur de format (1, 10, 25, 68)");
+    alert("Bravo ! Vous avez deviné le nombre");
+    return true;
   }
 }
 
@@ -17,8 +23,7 @@ function gameplay() {
   let givenNumber;
   do {
     givenNumber = askNumber();
-    didIWin(givenNumber);
-  } while (givenNumber !== 22 || isNaN(parseInt(givenNumber)));
+  } while (!didIWin(givenNumber));
 }
 
 gameplay();
