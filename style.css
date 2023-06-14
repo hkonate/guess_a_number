@@ -1,0 +1,18 @@
+body > div {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+div > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input {
+  margin: 0 10px;
+}
